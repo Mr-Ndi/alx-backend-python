@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
+"""Module for calculating the floor of a float.
 
-
-import math
-"""
-    annotated function
+This module provides a function that returns the floor of a given float number.
 """
 
 
