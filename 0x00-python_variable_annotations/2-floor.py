@@ -8,5 +8,12 @@ import math
 
 
 def floor(n: float) -> int:
-    '''A function that takes a float number and returns its floor.'''
-    return math.floor(n)
+    """Calculate the floor of a float number.
+
+    Args:
+        n (float): The float number to calculate the floor of.
+
+    Returns:
+        int: The floor of `n`.
+    """
+    return int(n)
