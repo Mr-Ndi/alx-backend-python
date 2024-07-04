@@ -1,33 +1,24 @@
 #!/usr/bin/env python3
 """
-This module provides a function `safely_get_value` that returns
-the value for a given key from a dictionary if the key exists,
-otherwise returns a default value.
+This module provides a function `safe_first_element` that safely
+returns the first element of a sequence or None if the sequence is empty.
 """
 
-from typing import Any, Mapping, TypeVar, Union
-
-T = TypeVar('T')
+from typing import Any, Sequence, Union
 
 
-def safely_get_value(dct: Mapping,
-                     key: Any,
-                     default: Union[T, None] = None
-                     ) -> Union[Any, T]:
+def safe_first_element(lst: Sequence[Any]) -> Union[Any, None]:
     """
-    Returns the value for a given key from a dictionary
-    if the key exists, otherwise returns a default value.
+    Safely returns the first element of a sequence or None if the
+    sequence is empty.
 
     Args:
-        dct: A dictionary from which to retrieve the value.
-        key: The key to look for in the dictionary.
-        default: The default value to return if the key is not found.
+        lst: A sequence of any type.
 
     Returns:
-        The value associated with the key in the dictionary or the
-        default value if the key is not found.
+        The first element of the sequence or None if the sequence is empty.
     """
-    if key in dct:
-        return dct[key]
+    if lst:
+        return lst[0]
     else:
-        return default
+        return None
