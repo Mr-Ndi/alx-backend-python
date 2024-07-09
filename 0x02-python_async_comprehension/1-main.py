@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
-waited = __import__('0-main.py').wait_random
+import asyncio
 
-print (waited)
+wait_random =__import__('0-main').wait_random
+waited = asyncio.run(wait_random())
+
+print(waited)
+

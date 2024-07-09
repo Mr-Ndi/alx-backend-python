@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 import asyncio
-import random
 
+async_generator = __import__('0-async_generator').async_generator
 
-async def wait_random(max_delay = 10):
-    max_delay = random.uniform(0, max_delay)
-    await asyncio.sleep(max_delay)
-    print ("Hello men")
-    return max_delay
+async def print_yielded_values():
+    result = []
+    async for i in async_generator():
+        result.append(i)
+    print(result)
 
-
-asyncio.run(wait_random())
+asyncio.run(print_yielded_values())
