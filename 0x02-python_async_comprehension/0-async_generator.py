@@ -12,7 +12,8 @@ importing neccesary ribraly
 
 async def async_generator():
     """
-        This is the function to be based on.
+    Yields:
+    float: A random number between 0 and 10.
     """
     for i in range(10):
         await asyncio.sleep(1)
