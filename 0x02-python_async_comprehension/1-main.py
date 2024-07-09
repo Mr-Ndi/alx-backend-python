@@ -2,8 +2,10 @@
 
 import asyncio
 
-wait_random =__import__('0-main').wait_random
-waited = asyncio.run(wait_random())
+async_comprehension = __import__('1-async_comprehension').async_comprehension
 
-print(waited)
 
+async def main():
+    print(await async_comprehension())
+
+asyncio.run(main())
