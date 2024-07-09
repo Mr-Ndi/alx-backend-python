@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 
+"""
+    A sample module.
+"""
 import asyncio
 import random
+"""
+importing neccesary ribraly
+"""
 
 
 async def async_generator():
