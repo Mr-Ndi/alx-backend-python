@@ -5,12 +5,13 @@
 """
 import asyncio
 from random import uniform
+from typing import List
 """
 importing neccesary ribraly
 """
 
 
-async def async_generator():
+async def async_generator() -> List[float]:
     """
     Yields:
     float: A random number between 0 and 10.
