@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
-'''
-We are going to import the uniforn from random
-and import list from typing
-'''
 
-
+"""
+    A sample module.
+"""
 import asyncio
 from random import uniform
+"""
+importing neccesary ribraly
+"""
 
 
 async def async_generator():
-    '''
-    This is an async generator
-    '''
-    for a in range(10):
+    """
+        This is the function to be based on.
+    """
+    for i in range(10):
         await asyncio.sleep(1)
         yield uniform(0, 10)
