@@ -2,7 +2,7 @@
 
 import unittest
 from parameterized import parameterized
-from utils import access_nested_map  # Adjust the import based on your project structure
+from utils import access_nested_map
 
 """
     Module for class TestAccessNestedMap that
@@ -28,5 +28,15 @@ class TestAccessNestedMap(unittest.TestCase):
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
+    def test_access_nested_map_exception(self, nested_map, path):
+            """
+                Test that accessing a nested map with an invalid path
+                raises KeyError.
+                Alspo it will check that the exception message is as expected
+            """
+            with self.assertRaises(KeyError) as context:
+                access_nested_map(nested_map, path)
+            
+            self.assertEqual(str(context.exception), path[-1])
 if __name__ == "__main__":
     unittest.main()
