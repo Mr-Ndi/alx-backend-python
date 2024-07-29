@@ -5,7 +5,9 @@ from unittest.mock import patch, Mock
 from parameterized import parameterized
 from typing import Dict
 import requests
-from utils import access_nested_map, get_json
+from functools import wraps
+from typing import Callable
+from utils import access_nested_map, get_json, memoize
 
 """
     Module for class TestAccessNestedMap that
@@ -55,20 +57,53 @@ class TestGetJson(unittest.TestCase):
     ])
     @patch('utils.requests.get')
     def test_get_json(self, test_url: str, test_payload: Dict, mock_get):
-        """Test that get_json returns the expected result."""
-        # Set up the mock to return a response with the test_payload
+        """
+            In this function we are going to :
+            -Test that get_json returns the expected result.
+            -Set up the mock to return a response with the test_payload
+            -Call the function with the test_url
+            -Assert the mocked get method was called once with the test_url
+            -Assert that the result is equal to the test_payload
+        """
         mock_response = Mock()
         mock_response.json.return_value = test_payload
         mock_get.return_value = mock_response
 
-        # Call the function with the test_url
         result = get_json(test_url)
 
-        # Assert the mocked get method was called once with the test_url
         mock_get.assert_called_once_with(test_url)
-        
-        # Assert that the result is equal to the test_payload
         self.assertEqual(result, test_payload)
+
+
+
+class TestMemoize(unittest.TestCase):
+    """Test suite for the memoize decorator."""
+
+    @patch('__main__.TestClass.a_method')
+    def test_memoize(self, mock_a_method):
+        """Test that memoize correctly caches results."""
+        # Set up the mock
+        mock_a_method.return_value = 42
+
+        class TestClass:
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        # Create an instance of TestClass
+        obj = TestClass()
+
+        # Call a_property twice
+        result_first_call = obj.a_property
+        result_second_call = obj.a_property
+
+        # Assertions
+        self.assertEqual(result_first_call, 42)
+        self.assertEqual(result_second_call, 42)
+        mock_a_method.assert_called_once()
 
 if __name__ == "__main__":
     unittest.main()
