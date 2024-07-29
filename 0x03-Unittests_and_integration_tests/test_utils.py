@@ -81,6 +81,7 @@ class TestClass:
         return 42
 
     @memoize
+    """This converts a_property into a property that caches its result."""
     def a_property(self):
         return self.a_method()
 
