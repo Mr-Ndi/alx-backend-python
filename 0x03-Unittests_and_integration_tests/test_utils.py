@@ -10,6 +10,7 @@ from utils import access_nested_map
      utils.access_nested_map
 """
 
+
 class TestAccessNestedMap(unittest.TestCase):
     """
         A class to implement the TestAccessNestedMap.
@@ -29,14 +30,15 @@ class TestAccessNestedMap(unittest.TestCase):
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     def test_access_nested_map_exception(self, nested_map, path):
-            """
-                Test that accessing a nested map with an invalid path
-                raises KeyError.
-                Alspo it will check that the exception message is as expected
-            """
-            with self.assertRaises(KeyError) as context:
-                access_nested_map(nested_map, path)
-            
-            self.assertEqual(str(context.exception), path[-1])
+        """
+           Test that accessing a nested map with an invalid path
+           raises KeyError.
+           Alspo it will check that the exception message is as expected
+        """
+        with self.assertRaises(KeyError) as context:
+            access_nested_map(nested_map, path)
+        self.assertEqual(str(context.exception), path[-1])
+
+
 if __name__ == "__main__":
     unittest.main()
