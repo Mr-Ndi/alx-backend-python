@@ -84,6 +84,7 @@ class TestClass:
     def a_property(self):
         return self.a_method()
 
+
 class TestMemoize(unittest.TestCase):
     """Test suite for the memoize decorator."""
 
