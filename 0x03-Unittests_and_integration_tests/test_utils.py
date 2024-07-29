@@ -75,24 +75,22 @@ class TestGetJson(unittest.TestCase):
         self.assertEqual(result, test_payload)
 
 
+class TestClass:
+    """Class to demonstrate memoization."""
+    def a_method(self):
+        return 42
+
+    @memoize
+    def a_property(self):
+        return self.a_method()
+
 
 class TestMemoize(unittest.TestCase):
     """Test suite for the memoize decorator."""
 
-    @patch('__main__.TestClass.a_method')
+    @patch.object(TestClass, 'a_method', return_value=42)
     def test_memoize(self, mock_a_method):
         """Test that memoize correctly caches results."""
-        # Set up the mock
-        mock_a_method.return_value = 42
-
-        class TestClass:
-            def a_method(self):
-                return 42
-
-            @memoize
-            def a_property(self):
-                return self.a_method()
-
         # Create an instance of TestClass
         obj = TestClass()
 
@@ -104,6 +102,7 @@ class TestMemoize(unittest.TestCase):
         self.assertEqual(result_first_call, 42)
         self.assertEqual(result_second_call, 42)
         mock_a_method.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()
