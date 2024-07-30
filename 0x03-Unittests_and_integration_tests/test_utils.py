@@ -75,16 +75,6 @@ class TestGetJson(unittest.TestCase):
         self.assertEqual(result, test_payload)
 
 
-class TestClass:
-    """Class to demonstrate memoization."""
-    def a_method(self):
-        return 42
-
-    @memoize
-    def a_property(self):
-        return self.a_method()
-
-
 class TestMemoize(unittest.TestCase):
     """
     in the codes below we will have:
@@ -98,6 +88,16 @@ class TestMemoize(unittest.TestCase):
 
     @patch.object(TestClass, 'a_method', return_value=42)
     def test_memoize(self, mock_a_method):
+
+        class TestClass:
+            """Class to demonstrate memoization."""
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
         obj = TestClass()
         result_first_call = obj.a_property
         result_second_call = obj.a_property
