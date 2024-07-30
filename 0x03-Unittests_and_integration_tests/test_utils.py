@@ -83,6 +83,7 @@ class TestClass:
 
 
 class TestMemoize(unittest.TestCase):
+    """Test suite for the memoize decorator."""
     @patch.object(TestClass, 'a_method', return_value=42)
     def test_memoize(self, mock_a_method):
         obj = TestClass()
