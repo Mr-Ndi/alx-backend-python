@@ -6,7 +6,6 @@ from parameterized import parameterized
 from typing import Dict
 import requests
 from functools import wraps
-from typing import Callable
 from utils import access_nested_map, get_json, memoize
 
 """
@@ -75,36 +74,32 @@ class TestGetJson(unittest.TestCase):
         self.assertEqual(result, test_payload)
 
 
+class TestClass:
+    """Class to demonstrate memoization."""
+    def a_method(self):
+        return 42
+
+    @memoize
+    def a_property(self):
+        return self.a_method()
+
 class TestMemoize(unittest.TestCase):
-    """
-    in the codes below we will have:
-        -Test suite for the memoize decorator.
-        -This converts a_property into a property that caches its result.
-        -Test that memoize correctly caches results.
-        -Create an instance of TestClass
-        -Call a_property twice
-        -Assertions
-    """
+    """Test suite for the memoize decorator."""
 
     @patch.object(TestClass, 'a_method', return_value=42)
     def test_memoize(self, mock_a_method):
-
-        class TestClass:
-            """Class to demonstrate memoization."""
-            def a_method(self):
-                return 42
-
-            @memoize
-            def a_property(self):
-                return self.a_method()
-
+        """Test that memoize correctly caches results."""
+        # Create an instance of TestClass
         obj = TestClass()
+
+        # Call a_property twice
         result_first_call = obj.a_property
         result_second_call = obj.a_property
+
+        # Assertions
         self.assertEqual(result_first_call, 42)
         self.assertEqual(result_second_call, 42)
         mock_a_method.assert_called_once()
-
 
 if __name__ == "__main__":
     unittest.main()
