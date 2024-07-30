@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
+"""
+This module contains unit tests for utils module functions including
+access_nested_map, get_json, and memoize decorator.
+"""
+
 import unittest
 from unittest.mock import patch, Mock
 from parameterized import parameterized
-from typing import Dict
+from typing import Dict, Any, Tuple
 import requests
 from utils import access_nested_map, get_json, memoize
 
@@ -74,18 +79,26 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestClass:
-    def a_method(self):
+    """Class to demonstrate memoization."""
+    def a_method(self) -> int:
+        """Return a constant value."""
         return 42
 
     @memoize
-    def a_property(self):
+    def a_property(self) -> int:
+        """Memoized method that calls a_method."""
         return self.a_method()
 
 
 class TestMemoize(unittest.TestCase):
     """Test suite for the memoize decorator."""
+
     @patch.object(TestClass, 'a_method', return_value=42)
-    def test_memoize(self, mock_a_method):
+    def test_memoize(self, mock_a_method: Mock) -> None:
+        """
+        Test that memoize correctly caches results
+        and calls the method only once.
+        """
         obj = TestClass()
 
         result_first_call = obj.a_property
