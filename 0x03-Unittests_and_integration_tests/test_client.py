@@ -13,7 +13,12 @@ from client import GithubOrgClient
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """Test suite for the GithubOrgClient class."""
+    """
+    Test suite for the GithubOrgClient class.
+    This class includes methods to test the functionality
+    of the GithubOrgClient class,
+    ensuring that it correctly interacts with the GitHub API.
+    """
 
     @parameterized.expand([
         ("google", {"login": "google"}),
@@ -25,7 +30,9 @@ class TestGithubOrgClient(unittest.TestCase):
     ) -> None:
         """
         Test that GithubOrgClient.org returns the correct value.
-        Ensure get_json is called once with the expected argument.
+        This method ensures that the get_json function is called once with
+        the expected argument and verifies that the org method of the
+        GithubOrgClient class returns the correct value.
         Args:
             org_name (str): The name of the organization.
             expected (Dict): The expected return value of the org method.
